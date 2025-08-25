@@ -1,0 +1,80 @@
+html, body {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
+    color: #666;
+}
+
+h1 {
+    margin: 0 0 20px;
+    font-weight: 800;
+    font-size: 80px;
+    color: black;
+}
+
+p {
+    margin: 0 0 5px;
+    font-size: 20px;
+}
+
+.main-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: powderblue;
+}
+
+.left-part {
+    padding: 25px;
+    margin: 25px;
+    background: #f5f5f5;
+}
+
+
+.fas {
+    margin: 25px 10px 0;
+    font-size: 72px;
+    color: #fff;
+}
+
+.fa-comment{
+    transform: rotate(-20deg);
+}
+
+.fa-star , .fa-eye{
+    transform: rotate(10deg);
+}
+
+@media (min-width: 568px) {
+    .main-block {
+        flex-direction: row;
+    }
+
+    .left-part, .right-part {
+        width: 50%;
+    }
+
+    .fa-comment {
+        margin-top: 0;
+        margin-left: 20%;
+    }
+
+    .fa-star {
+        margin-top: -10%;
+        margin-left: 65%;
+    }
+
+    .fa-eye {
+        margin-top: 2%;
+        margin-left: 28%;
+    }
+
+    .fa-hourglass {
+        margin-top: 8%;
+        margin-left: 50%;
+    }
+

@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org">
+
+    <head>
+
+        <title>User Sign-Up Page</title>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/signupstyles.css">
+        
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">              
+
+    </head>
+
+    <body>
+
+        <div class="main-block">
+
+            <div class="left-part">
+
+                <i class="fas fa-envelope"></i>
+
+                <i class="fas fa-at"></i>
+
+                <i class="fas fa-mail-bulk"></i>
+
+            </div>
+
+            <form id="challengeForm" action="#" th:action="@{/verify-identity}" th:object="${challengedetails}" method="post">
+
+                <h1>Get started with your account</h1>
+
+                <p>Let's begin by finding your information:</p>
+                    
+                <div class="info">
+
+                    <input type="text" name="SSN" placeholder="Last 4 Digits of your SSN/ITN" th:field="*{ssn}">
+
+                    <input type="text" name="PhoneNumber" placeholder="Mobile Phone Number" th:field="*{phoneNumber}">                    
+
+                    <button id="submitbutton" type="submit">Submit</button>
+                    
+                    <br/>
+                    <a href="http://localhost:8080/review">I don't have a mobile phone</a>
+                    
+
+                </div>
+                
+                <h2 id="message"></h2>
+
+            </form>
+
+
+        </div>
+
+
+    </body>
+
+</html>

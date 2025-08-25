@@ -1,4 +1,4 @@
-package com.example.proveprefilldemo;
+package draft.dev.proveprefilldemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
