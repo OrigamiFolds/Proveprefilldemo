@@ -9,7 +9,6 @@ package draft.dev.proveprefilldemo;
  * @author beart
  */
 public class Form {
-    private String phoneNumber;
     private String firstName;
     private String lastName;
     private String address;
@@ -19,15 +18,7 @@ public class Form {
     private String dob;
     private String ssn;
     private String emailAddress;
-    private String flowType;
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+   
 
     public String getFirstName() {
         return firstName;
@@ -100,15 +91,6 @@ public class Form {
     public void setemailAddress(String email) {
         this.emailAddress = email;
     }
-
-    public String getFlowType() {
-        return flowType;
-    }
-
-    public void setFlowType(String flowType) {
-        this.flowType = flowType;
-    }
- 
-    
+        
     
 }

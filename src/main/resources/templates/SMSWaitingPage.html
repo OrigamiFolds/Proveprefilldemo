@@ -1,34 +1,88 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-<head>
-    <title>Review Page</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <head>
+        <title>Review Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link href="/css/resultsstyles.css" rel="stylesheet">
-   
-</head>
-<body>
-<div class="main-block">
-    <div class="left-part">
-        <h1>We have sent you a link</h1>
-        <p> Please check the link we just sent to </p>
-        <p th:text="${phoneNumber}" />        
-        <br/>
-        Didn't receive the link? 
-        <a href="http://localhost:8080/">Change Phone Number</a>
-        
-    </div>
-    <div class="right-part">
-        <i class="fas fa-eye"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-comment"></i>
-        <i class="fas fa-hourglass"></i>
-    </div>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+              integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+        <link href="/css/resultsstyles.css" rel="stylesheet">
 
-</div>>
+    </head>
+    <body>
+        <div class="main-block">
+            <div class="left-part">
+                <h1>We've sent you a link</h1>
+                <p> Please check the link we just sent to </p>
+                <p th:text="${phoneNumber}" />        
+                <br/>
+                Didn't receive the link? 
+                <a href="http://localhost:8080/">Change Phone Number</a>
 
-</body>
+            </div>
+            <div class="right-part">
+                <i class="fas fa-eye"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-comment"></i>
+                <i class="fas fa-hourglass"></i>
+            </div>
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@prove-identity/prove-auth@2.8.2/build/bundle/release/prove-auth.js"></script>
+        <script th:inline="javascript">
+
+            var authToken = /*[[${authToken}]]*/ "default";
+            var ssn = /*[[${ssn}]]*/ "default";
+
+            function instantLink(phoneNumberNeeded, phoneValidationError) {
+                return new Promise((resolve, reject) => {
+                    // Since no phone number is needed, don't prompt the user.
+                    resolve(null);
+                });
+            }
+
+            async function verify(input) {
+
+                fetch('/validate', {
+                    method: 'POST',
+                    headers: {
+                        "X-Correlation-ID": input,
+                        "X-SSN": ssn
+                    }
+
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error("Server error");
+                    }
+                    return response.text();
+                }).then(html => {
+                    document.body.innerHTML = html; // optionally inject Thymeleaf-rendered page
+                });
+
+
+            }
+
+        </script>
+        <script>
+            if (authToken !== null) {
+
+
+                let builder = new proveAuth.AuthenticatorBuilder();
+
+                // Set up Instant Link.
+                builder = builder
+                        .withAuthFinishStep((input) => verify(input.authId))
+                        .withInstantLinkFallback(instantLink)
+                        .withRole("secondary");
+
+
+                const authenticator = builder.build();
+                // Authenticate with the authToken.
+                console.log("Auhtenticator Result:" + authenticator.authenticate(authToken));
+            }
+
+        </script>
+
+    </body>
 </html>
