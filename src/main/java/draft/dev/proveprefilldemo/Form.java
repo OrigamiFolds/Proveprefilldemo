@@ -18,6 +18,7 @@ public class Form {
     private String dob;
     private String ssn;
     private String emailAddress;
+    private String correlationId;
    
 
     public String getFirstName() {
@@ -90,6 +91,14 @@ public class Form {
 
     public void setemailAddress(String email) {
         this.emailAddress = email;
+    }
+
+    public String getCorrelationId() {
+        return correlationId;
+    }
+
+    public void setCorrelationId(String correlationId) {
+        this.correlationId = correlationId;
     }
         
     
